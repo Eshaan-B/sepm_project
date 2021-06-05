@@ -187,10 +187,7 @@ class _AddFlatScreenState extends State<AddFlatScreen> {
                 SizedBox(
                   height: 20,
                 ),
-                Divider(
-                  thickness: 1,
-                  color: Colors.grey,
-                ),
+
                 SizedBox(
                   height: 10,
                 ),
@@ -213,7 +210,7 @@ class _AddFlatScreenState extends State<AddFlatScreen> {
                 ),
                 if(images.length !=0) Container(
                   width: MediaQuery.of(context).size.width,
-                  height: 100,
+                  height: 120,
                   child: Expanded(
                     child: buildGridView(),
                   ),

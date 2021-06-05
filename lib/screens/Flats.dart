@@ -1,11 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../providers/flat_provider.dart';
 import 'FlatsListScreen.dart';
 
-class Flats extends StatelessWidget {
+class Flats extends StatefulWidget {
   static const routeName = '/flats';
+
+  @override
+  _FlatsState createState() => _FlatsState();
+}
+
+class _FlatsState extends State<Flats> with AutomaticKeepAliveClientMixin{
+
+  @override
+  bool get wantKeepAlive => true;
+  GoogleMapController _controller;
+  void _onMapCreated(GoogleMapController controller) {
+    if( _controller == null )
+      _controller = controller;
+  }
   @override
   Widget build(BuildContext context) {
     List<FlatName> flatNames = Provider.of<FlatProvider>(context).flatNames;
@@ -23,9 +37,10 @@ class Flats extends StatelessWidget {
                     Container(
                       width: double.infinity,
                       height: 300,
-                      child: Image.network(
-                        'https://miro.medium.com/max/4064/1*qYUvh-EtES8dtgKiBRiLsA.png',
-                        fit: BoxFit.cover,
+                      child: GoogleMap(
+                        myLocationEnabled: true,
+                        onMapCreated: _onMapCreated,
+                        initialCameraPosition: CameraPosition(target: LatLng(11.127123, 78.656891), zoom: 11.0),
                       ),
                     ),
                     SizedBox(

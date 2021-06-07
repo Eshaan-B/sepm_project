@@ -30,6 +30,7 @@ class _FlatListScreenScreenState extends State<FlatsListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).accentColor,
         onPressed: () {

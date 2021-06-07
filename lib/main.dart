@@ -41,10 +41,10 @@ class FoundIt extends StatelessWidget {
       ],
       child: MaterialApp(
         theme: ThemeData(
-          primarySwatch: MaterialColor(0xff1a1c20, color),
+          primarySwatch: Colors.lightBlue,
 
-          //accentColor: MaterialColor(0xfff9813a, color),
-          accentColor: Colors.deepOrangeAccent,
+          accentColor: Colors.blue,
+
           fontFamily: 'Lato',
         ),
         routes: {

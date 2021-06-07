@@ -7,7 +7,7 @@ class LandlordLoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.teal,
+
         child: Icon(
           Icons.arrow_right_alt_rounded,
           size: 35,
@@ -22,18 +22,15 @@ class LandlordLoginScreen extends StatelessWidget {
           children: [
             Container(
               height: 150,
-              width: 150,
-              child: Image.network(
-                'https://media-exp1.licdn.com/dms/image/C4E0BAQFQYA2aCgiJ0Q/company-logo_200_200/0/1519891277387?e=2159024400&v=beta&t=AoSOoabCk2OPLh0LxMndKfkC0jZJ2DkV1IBBHF_XbpQ',
-                fit: BoxFit.cover,
-              ),
+              width: double.infinity,
+              child: Image.asset('assets/images/home2.png')
             ),
             SizedBox(
               height: 30,
             ),
             Text(
               'Landlord Login',
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
             ),
             SizedBox(
               height: 30,
@@ -49,7 +46,7 @@ class LandlordLoginScreen extends StatelessWidget {
                   ),
                   filled: true,
                   hintStyle: new TextStyle(color: Colors.grey[800]),
-                  hintText: "Enter SRM email",
+                  hintText: "Enter mail id",
                   fillColor: Colors.white70,
                 ),
                 style: TextStyle(height: 1),

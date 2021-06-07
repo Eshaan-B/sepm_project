@@ -1,7 +1,10 @@
+import 'dart:convert';
+import 'dart:async';
 import 'package:flutter/material.dart';
+
 //import 'package:provider/provider.dart';
 import 'package:multi_image_picker2/multi_image_picker2.dart';
-
+import 'package:http/http.dart' as http;
 
 class FlatCard {
   String id;
@@ -12,88 +15,35 @@ class FlatCard {
   List<Asset> images;
   String description;
   AssetImage img; //or NetworkImage
-  FlatCard(
-      {this.id,
-      this.bhk,
-      this.sharing,
-      this.price,
-      this.name,
-      this.img,
-      this.images,
-      this.description,
-      this.address});
+  FlatCard({this.id,
+    this.bhk,
+    this.sharing,
+    this.price,
+    this.name,
+    this.img,
+    this.images,
+    this.description,
+    this.address});
 }
 
 class FlatName {
   String name;
   String address;
+
   FlatName({this.name, this.address});
 }
 
 class FlatProvider with ChangeNotifier {
   List<FlatName> _flatNames = [];
+
   List<FlatName> get flatNames {
     return [..._flatNames];
   }
 
   List<FlatCard> _flatsList = [
-    // FlatCard(
-    //     id: 'f1',
-    //     bhk: 5,
-    //     price: 3000,
-    //     sharing: 9,
-    //     name: 'Estancia',
-    //     img: AssetImage('assets/images/flat1.jpg')),
-    // FlatCard(
-    //     id: 'f2',
-    //     bhk: 2,
-    //     price: 2500,
-    //     sharing: 2,
-    //     name: 'Adobe',
-    //     img: AssetImage('assets/images/flat2.jpg')),
-    // FlatCard(
-    //     id: 'f3',
-    //     bhk: 3,
-    //     price: 2500,
-    //     sharing: 6,
-    //     name: 'Adobe',
-    //     img: AssetImage('assets/images/flat1.jpg')),
-    // FlatCard(
-    //     id: 'f4',
-    //     bhk: 3,
-    //     price: 2500,
-    //     sharing: 4,
-    //     name: 'Estancia',
-    //     img: AssetImage('assets/images/flat2.jpg')),
-    // FlatCard(
-    //     id: 'f5',
-    //     bhk: 5,
-    //     price: 3000,
-    //     sharing: 9,
-    //     name: 'Estancia',
-    //     img: AssetImage('assets/images/flat1.jpg')),
-    // FlatCard(
-    //     id: 'f6',
-    //     bhk: 2,
-    //     price: 2500,
-    //     sharing: 2,
-    //     name: 'Adobe',
-    //     img: AssetImage('assets/images/flat2.jpg')),
-    // FlatCard(
-    //     id: 'f7',
-    //     bhk: 2,
-    //     price: 2500,
-    //     sharing: 2,
-    //     name: 'SIS',
-    //     img: AssetImage('assets/images/flat2.jpg')),
-    // FlatCard(
-    //     id: 'f8',
-    //     bhk: 2,
-    //     price: 2500,
-    //     sharing: 2,
-    //     name: 'SIS',
-    //     img: AssetImage('assets/images/flat2.jpg')),
+
   ];
+
   List<FlatCard> get flatList {
     return [..._flatsList];
   }
@@ -103,19 +53,35 @@ class FlatProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void addFlat(FlatCard flat) {
-    _flatsList.add(
-      FlatCard(
-        id: DateTime.now().toString(),
-        bhk: flat.bhk,
-        name: flat.name,
-        price: flat.price,
-        images: flat.images,
-        sharing: flat.sharing,
-        address: flat.address,
-        description: flat.description,
-      ),
-    );
+  void addFlat(FlatCard flat) async {
+    const _url = 'https://sepmproject-f0758-default-rtdb.firebaseio.com/flats.json';
+    try {
+      dynamic response = await http.post(_url,
+          body: json.encode({
+            'name': flat.name,
+            'address': flat.address,
+            'description': flat.description,
+            'bhk': flat.bhk,
+            'price': flat.price,
+            'sharing':flat.sharing,
+          }));
+      _flatsList.add(
+        FlatCard(
+          id: json.decode(response.body)['name'],
+          bhk: flat.bhk,
+          name: flat.name,
+          price: flat.price,
+          images: flat.images,
+          sharing: flat.sharing,
+          address: flat.address,
+          description: flat.description,
+        ),
+      );
+      print(json.decode(response.body));
+    }catch(error){
+      print(error.toString());
+    }
+
     notifyListeners();
   }
 }

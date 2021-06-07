@@ -6,8 +6,8 @@ class StudentLoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+  backgroundColor: Colors.white,
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.teal,
         child: Icon(
           Icons.arrow_right_alt_rounded,
           size: 35,
@@ -23,11 +23,8 @@ class StudentLoginPage extends StatelessWidget {
           children: [
             Container(
               height: 150,
-              width: 150,
-              child: Image.network(
-                'https://media-exp1.licdn.com/dms/image/C4E0BAQFQYA2aCgiJ0Q/company-logo_200_200/0/1519891277387?e=2159024400&v=beta&t=AoSOoabCk2OPLh0LxMndKfkC0jZJ2DkV1IBBHF_XbpQ',
-                fit: BoxFit.cover,
-              ),
+              width: double.infinity,
+              child: Image.asset('assets/images/studentLogin.png')
             ),
             SizedBox(
               height: 30,

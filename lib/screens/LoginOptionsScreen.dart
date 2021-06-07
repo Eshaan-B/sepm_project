@@ -8,19 +8,16 @@ class LoginOptionsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      backgroundColor: Colors.white,
       body: Center(
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                width: 300,
+                width: double.infinity,
                 height: 200,
-                child: Image.network(
-                  'https://www.foundit.com/wp-content/uploads/2017/03/foundit-logofull-colorRGB-002.png',
-                  //fit: BoxFit.cover,
-                ),
+                child: Image.asset('assets/images/home1.png')
               ),
               SizedBox(
                 height: 30,

@@ -48,7 +48,8 @@ class FlatsList extends StatelessWidget {
                         margin: EdgeInsets.only(bottom: 20, top: 10),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10)),
-                        elevation: 5,
+                        elevation: 7,
+                        color: Colors.white70,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.center,
